@@ -4,7 +4,9 @@
   "description": "Backe-end for the raspalarm project",
   "main": "raspalarm-server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.5.9",
+    "nosql": "^6.1.0"
   },
   "devDependencies": {},
   "scripts": {
