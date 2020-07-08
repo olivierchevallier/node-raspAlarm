@@ -1,0 +1,16 @@
+{
+  "name": "raspalarm-back",
+  "version": "1.0.0",
+  "description": "Backe-end for the raspalarm project",
+  "main": "raspalarm-server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "nodemon raspalarm-server.js",
+    "start": "node raspalarm-server.js"
+  },
+  "author": "Olivier Chevallier",
+  "license": "ISC"
+}
