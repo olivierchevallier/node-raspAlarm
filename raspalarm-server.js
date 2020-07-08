@@ -1,20 +1,20 @@
 var express = require('express');
-var mongodb = require('mongodb');
+const fs = require('fs');
 
 var app = express();
-var MongoClient = mongodb.MongoClient;
 
 const PORT = process.env.PORT || 5005;
-const DB_URL = "mongodb://localhost:27017/raspalarm";
 
-MongoClient.connect(DB_URL, function(err, db) {
-  if (err) throw err;
-  console.log("Connected to database !");
-  db.close();
-});
+var listAlarms = () => {
+  console.log('Getting alarms...');
+  let data = fs.readFileSync('./data/alarms.json');
+  let alarms = JSON.parse(data);
+  console.log(alarms);
+  return alarms;
+};
 
-app.get('/', (req, res, next) => {
-  res.send('Hello world !');
+app.get('/alarms', (req, res, next) => {
+  res.send(listAlarms());
 });
 
 app.listen(PORT, () => {
