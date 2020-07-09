@@ -23,7 +23,29 @@ class AlarmList {
     });
   }
 
+  append(alarmJSON) {
+    let alarm = new Alarm( 
+      getNextId(),
+      alarmJSON.name,
+      alarmJSON.hh,
+      alarmJSON.mm,
+      alarmJSON.repeat,
+      alarmJSON.active,
+      alarmJSON.uri
+    );
+    this.alarms.push(alarm);
+    this.save();
+  }
 }
 
+var save = () => {
+  fs.writeFileSync(ALARMS_PATH, this.alarms);
+}
+
+var getNextId = () => {
+  let lastIndex = alarms.length - 1;
+  let lastId = this.alarms[lastIndex].id;
+  return lastId + 1;
+}
 
 module.exports = AlarmList;
