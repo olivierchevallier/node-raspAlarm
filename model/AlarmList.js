@@ -48,6 +48,14 @@ class AlarmList {
     let lastId = this.alarms[lastIndex].id;
     return lastId + 1;
   }
+
+  toString() {
+    let string = '';
+    this.alarms.forEach(alarm => {
+      string += alarm.toString() + '\n';
+    });
+    return string;
+  }
 }
 
 module.exports = AlarmList;

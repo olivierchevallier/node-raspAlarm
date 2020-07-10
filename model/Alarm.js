@@ -6,40 +6,41 @@ class Alarm {
     this.minutes = minutes;
     this.repeat = repeat;
     this.active = active;
+    this.uri = uri;
   }
 
   isWeekDays() {
-    for (i = 0; i < this.repeat.length; i++) {
+    for (let i = 0; i < this.repeat.length; i++) {
       if (!this.repeat[i]) {
         if (i < 5) {
           return false;
         }
       }
     }
+    return true;
   }
 
   isEveryDay() {
-    for (i = 0; i < this.repeat.length; i++) {
+    for (let i = 0; i < this.repeat.length; i++) {
       if (!this.repeat[i]) {
         return false;
       }
     }
+    return true;
   }
 
   isWeekend() {
-    for (i = 0; i < this.repeat.length; i++) {
+    for (let i = 0; i < this.repeat.length; i++) {
       if (i >= 5) {
         return false;
       }
     }
+    return true;
   }
 
   repeatToString() {
-    let allDays = true,
-      weekDays = true,
-      weekEnd = true;
     let res = '';
-    for (i = 0; i < this.repeat.length; i++) {
+    for (let i = 0; i < this.repeat.length; i++) {
       if (this.repeat[i]) {
         res += i + ' ';
       }
@@ -47,9 +48,9 @@ class Alarm {
     if (this.isEveryDay()) {
       res = 'all days';
     } else {
-      if (this.weekDays) {
+      if (this.isWeekDays()) {
         res = 'weekdays';
-      } else if (this.weekEnd) {
+      } else if (this.isWeekend()) {
         res = 'weekend';
       }
     }
@@ -67,9 +68,9 @@ class Alarm {
   toString() {
     return (
       this.id +
-      ' :' +
-      this.name +
-      this.repeatToString +
+      ' : ' +
+      this.name + ' ' +
+      this.repeatToString() +
       ' at ' +
       this.formatTimeNumber(this.hours) +
       'h' +

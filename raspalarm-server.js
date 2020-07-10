@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 5005;
 
 var list_alarms = () => {
   console.log('Getting alarms...');
+  console.log(alarms.toString());
   return alarms;
 };
 
