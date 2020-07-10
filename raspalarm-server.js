@@ -5,6 +5,7 @@ const fs = require('fs');
 const AlarmList = require('./model/AlarmList');
 
 var app = express();
+app.use(bodyParser.json());
 var alarms = new AlarmList();
 
 const PORT = process.env.PORT || 5005;
@@ -15,7 +16,7 @@ var list_alarms = () => {
 };
 
 var save_alarm = (alarm) => {
-  console.log(alarm);
+  alarms.append(alarm);
 };
 
 app.get('/alarms', (req, res, next) => {
@@ -23,7 +24,7 @@ app.get('/alarms', (req, res, next) => {
 });
 
 app.post('/alarms', async (req, res, next) => {
-  console.log(req.body);
+  save_alarm(req.body);
   res.send('ok');
   next();
 });

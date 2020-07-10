@@ -1,4 +1,5 @@
 const fs = require('fs');
+const jsonFile = require('jsonfile');
 
 const Alarm = require('./Alarm');
 
@@ -25,7 +26,7 @@ class AlarmList {
 
   append(alarmJSON) {
     let alarm = new Alarm( 
-      getNextId(),
+      this.getNextId(),
       alarmJSON.name,
       alarmJSON.hh,
       alarmJSON.mm,
@@ -36,16 +37,17 @@ class AlarmList {
     this.alarms.push(alarm);
     this.save();
   }
-}
 
-var save = () => {
-  fs.writeFileSync(ALARMS_PATH, this.alarms);
-}
-
-var getNextId = () => {
-  let lastIndex = alarms.length - 1;
-  let lastId = this.alarms[lastIndex].id;
-  return lastId + 1;
+  save () {
+    console.log(this.alarms);
+    jsonFile.writeFile(ALARMS_PATH, this.alarms);
+  }
+  
+  getNextId () {
+    let lastIndex = this.alarms.length - 1;
+    let lastId = this.alarms[lastIndex].id;
+    return lastId + 1;
+  }
 }
 
 module.exports = AlarmList;
