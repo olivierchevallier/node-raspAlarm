@@ -14,8 +14,8 @@ class AlarmList {
       let alarm = new Alarm( 
         alarmJSON.id,
         alarmJSON.name,
-        alarmJSON.hh,
-        alarmJSON.mm,
+        alarmJSON.hours,
+        alarmJSON.minutes,
         alarmJSON.repeat,
         alarmJSON.active,
         alarmJSON.uri
@@ -28,8 +28,8 @@ class AlarmList {
     let alarm = new Alarm( 
       this.getNextId(),
       alarmJSON.name,
-      alarmJSON.hh,
-      alarmJSON.mm,
+      alarmJSON.hours,
+      alarmJSON.minutes,
       alarmJSON.repeat,
       alarmJSON.active,
       alarmJSON.uri

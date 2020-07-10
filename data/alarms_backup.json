@@ -2,8 +2,8 @@
   {
     "id": 0,
     "name": "Reveil",
-    "hh": 8,
-    "mm": 30,
+    "hours": 8,
+    "minutes": 30,
     "repeat": [
       true,
       true,
@@ -19,8 +19,8 @@
   {
     "id": 1,
     "name": "Repas",
-    "hh": 19,
-    "mm": 0,
+    "hours": 19,
+    "minutes": 0,
     "repeat": [
       true,
       true,
@@ -36,8 +36,8 @@
   {
     "id": 2,
     "name": "Rupestritude",
-    "hh": 21,
-    "mm": 30,
+    "hours": 21,
+    "minutes": 30,
     "repeat": [
       true,
       true,
@@ -53,8 +53,8 @@
   {
     "id": 3,
     "name": "Stick",
-    "hh": 4,
-    "mm": 20,
+    "hours": 4,
+    "minutes": 20,
     "repeat": [
       false,
       true,
@@ -70,8 +70,8 @@
   {
     "id": 4,
     "name": "S'enjailler",
-    "hh": 22,
-    "mm": 0,
+    "hours": 22,
+    "minutes": 0,
     "repeat": [
       false,
       false,
