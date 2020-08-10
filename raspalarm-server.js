@@ -32,6 +32,7 @@ var save_alarm = (alarm) => {
 };
 
 var delete_alarm = (alarm_id) => {
+  console.log('Deleting alarm ' + alarm_id + '...');
   try {
     alarms.delete(alarm_id);
   } catch (e) {
@@ -40,6 +41,7 @@ var delete_alarm = (alarm_id) => {
 };
 
 var edit_alarm = (alarm_id, alarm) => {
+  console.log('Editing alarm ' + alarm_id + '...');
   try {
     alarms.edit(alarm_id, alarm);
   } catch (e) {
