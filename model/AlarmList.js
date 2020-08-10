@@ -24,9 +24,10 @@ class AlarmList {
     });
   }
 
-  append(alarmJSON) {
+  append(alarmJSON, alarm_id = -1) {
+    let id = alarm_id == -1 ? this.getNextId() : alarm_id;
     let alarm = new Alarm(
-      this.getNextId(),
+      id,
       alarmJSON.name,
       alarmJSON.hours,
       alarmJSON.minutes,
@@ -42,7 +43,20 @@ class AlarmList {
     let to_delete = this.alarms.findIndex((alarm) => {
       return alarm_id == alarm.id;
     });
+    if(to_delete < 0) {
+      throw 'Cannot find alarm with id ' + alarm_id;
+    }
     this.alarms.splice(to_delete, 1);
+    this.save();
+  }
+
+  edit(alarm_id, alarmJSON) {
+    try {
+      this.delete(alarm_id);
+    } catch(e) {
+      throw e;
+    }
+    this.append(alarmJSON, alarm_id);
     this.save();
   }
 
