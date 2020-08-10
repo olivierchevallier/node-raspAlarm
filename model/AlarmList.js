@@ -24,6 +24,16 @@ class AlarmList {
     });
   }
 
+  get(alarm_id) {
+    let to_return = this.alarms.findIndex((alarm) => {
+      return alarm_id == alarm.id;
+    });
+    if(to_return < 0) {
+      throw 'Cannot find alarm with id ' + alarm_id;
+    }
+    return this.alarms[to_return];
+  }
+
   append(alarmJSON, alarm_id = -1) {
     let id = alarm_id == -1 ? this.getNextId() : alarm_id;
     let alarm = new Alarm(
