@@ -10,6 +10,17 @@ var alarms = new AlarmList();
 
 const PORT = process.env.PORT || 5005;
 
+var get_alarm = (alarm_id) => {
+  console.log('Getting alarm ' + alarm_id + '...');
+  try {
+    let alarm = alarms.get(alarm_id);
+    console.log(alarm.toString());
+    return alarm;
+  } catch (e) {
+    throw e;
+  }
+};
+
 var list_alarms = () => {
   console.log('Getting alarms...');
   console.log(alarms.toString());
@@ -35,6 +46,18 @@ var edit_alarm = (alarm_id, alarm) => {
     throw e;
   }
 };
+
+app.get('/alarms/:id', (req, res, next) => {
+  let alarm_id = req.params.id;
+  try {
+    let alarm = get_alarm(alarm_id);
+    res.send(alarm);
+  } catch (e) {
+    console.log('Error while getting alarm');
+    console.log(e);
+    res.send('Alarm with id ' + alarm_id + ' cannot be got');
+  }
+});
 
 app.get('/alarms', (req, res, next) => {
   res.send(list_alarms());
