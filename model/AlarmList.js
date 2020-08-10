@@ -73,6 +73,7 @@ class AlarmList {
   save() {
     console.log(this.alarms);
     jsonFile.writeFile(ALARMS_PATH, this.alarms);
+    this.write_crontab();
   }
 
   getNextId() {
@@ -87,6 +88,14 @@ class AlarmList {
       string += alarm.toString() + '\n';
     });
     return string;
+  }
+
+  write_crontab() {
+    // Ça ne fonctionne pas, à méditer plus tard...
+    require('crontab').load((err, crontab) => {
+      var job = crontab.create('ls -la', '0 7 * * 1,2,3,4,5');
+      crontab.create();
+    });
   }
 }
 
