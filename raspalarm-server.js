@@ -1,5 +1,5 @@
 const express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 const fs = require('fs');
 
 const AlarmList = require('./model/AlarmList');
@@ -21,7 +21,19 @@ var save_alarm = (alarm) => {
 };
 
 var delete_alarm = (alarm_id) => {
-  alarms.delete(alarm_id);
+  try {
+    alarms.delete(alarm_id);
+  } catch (e) {
+    throw e;
+  }
+};
+
+var edit_alarm = (alarm_id, alarm) => {
+  try {
+    alarms.edit(alarm_id, alarm);
+  } catch (e) {
+    throw e;
+  }
 };
 
 app.get('/alarms', (req, res, next) => {
@@ -36,8 +48,26 @@ app.post('/alarms', async (req, res, next) => {
 
 app.delete('/alarms/:id', (req, res, next) => {
   let alarm_id = req.params.id;
-  delete_alarm(alarm_id);
-  res.send('alarm with id ' + alarm_id + ' successfully deleted' );
+  try {
+    delete_alarm(alarm_id);
+    res.send('alarm with id ' + alarm_id + ' successfully deleted');
+  } catch (e) {
+    console.log('Error while delete alarm ! ');
+    console.log(e);
+    res.send('alarm with id ' + alarm_id + ' cannot be deleted');
+  }
+});
+
+app.put('/alarms/:id', (req, res, next) => {
+  let alarm_id = req.params.id;
+  try {
+    edit_alarm(alarm_id, req.body);
+    res.send('alarm with id ' + alarm_id + ' successfully edited');
+  } catch (e) {
+    console.log('Error while editing alarm ! ');
+    console.log(e);
+    res.send('alarm with id ' + alarm_id + ' cannot be edited');
+  }
 });
 
 app.listen(PORT, () => {
