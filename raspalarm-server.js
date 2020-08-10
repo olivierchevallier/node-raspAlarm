@@ -20,14 +20,24 @@ var save_alarm = (alarm) => {
   alarms.append(alarm);
 };
 
+var delete_alarm = (alarm_id) => {
+  alarms.delete(alarm_id);
+};
+
 app.get('/alarms', (req, res, next) => {
   res.send(list_alarms());
 });
 
 app.post('/alarms', async (req, res, next) => {
   save_alarm(req.body);
-  res.send('ok');
+  res.send('alarm successfully appended');
   next();
+});
+
+app.delete('/alarms/:id', (req, res, next) => {
+  let alarm_id = req.params.id;
+  delete_alarm(alarm_id);
+  res.send('alarm with id ' + alarm_id + ' successfully deleted' );
 });
 
 app.listen(PORT, () => {

@@ -11,7 +11,7 @@ class AlarmList {
     let alarmsJSON = JSON.parse(data);
     this.alarms = Array();
     alarmsJSON.forEach((alarmJSON) => {
-      let alarm = new Alarm( 
+      let alarm = new Alarm(
         alarmJSON.id,
         alarmJSON.name,
         alarmJSON.hours,
@@ -25,7 +25,7 @@ class AlarmList {
   }
 
   append(alarmJSON) {
-    let alarm = new Alarm( 
+    let alarm = new Alarm(
       this.getNextId(),
       alarmJSON.name,
       alarmJSON.hours,
@@ -38,12 +38,20 @@ class AlarmList {
     this.save();
   }
 
-  save () {
+  delete(alarm_id) {
+    let to_delete = this.alarms.findIndex((alarm) => {
+      return alarm_id == alarm.id;
+    });
+    this.alarms.splice(to_delete, 1);
+    this.save();
+  }
+
+  save() {
     console.log(this.alarms);
     jsonFile.writeFile(ALARMS_PATH, this.alarms);
   }
-  
-  getNextId () {
+
+  getNextId() {
     let lastIndex = this.alarms.length - 1;
     let lastId = this.alarms[lastIndex].id;
     return lastId + 1;
@@ -51,7 +59,7 @@ class AlarmList {
 
   toString() {
     let string = '';
-    this.alarms.forEach(alarm => {
+    this.alarms.forEach((alarm) => {
       string += alarm.toString() + '\n';
     });
     return string;
