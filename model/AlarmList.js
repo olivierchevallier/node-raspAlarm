@@ -90,9 +90,14 @@ class AlarmList {
     return string;
   }
 
-  write_crontab() {
+  async write_crontab() {
     require('crontab').load((err, crontab) => {
-      crontab.reset();
+      var jobs = crontab.jobs();
+      jobs.forEach((job) => {
+        if(job.command().includes('reveil.py')) {
+          crontab.remove(job);
+        }
+      });
       this.alarms.forEach((alarm) => {
         crontab.create(alarm.bash_command(), alarm.cron_repeat());
       });
