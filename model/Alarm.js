@@ -7,6 +7,9 @@ class Alarm {
     this.repeat = repeat;
     this.active = active;
     this.uri = uri;
+
+    this.COMMAND = 'python3 ../reveil.py';
+    this.LOG_FILE = 'reveil.log';
   }
 
   isWeekDays() {
@@ -31,8 +34,10 @@ class Alarm {
 
   isWeekend() {
     for (let i = 0; i < this.repeat.length; i++) {
-      if (i >= 5) {
-        return false;
+      if(!this.repeat[i]){
+        if (i >= 5) {
+          return false;
+        }
       }
     }
     return true;
@@ -80,6 +85,24 @@ class Alarm {
       ' ' +
       this.uri
     );
+  }
+
+  bash_command() {
+    return this.COMMAND + ' ' + this.uri + ' >>' + this.LOG_FILE;
+  }
+
+  cron_repeat() {
+    let value = this.minutes + ' ' + this.hours + ' * *';
+    let days = '';
+    for (let i = 0; i < this.repeat.length; i++) {
+      let last_index = this.repeat.length - 1;
+      if(this.repeat[i]) {
+        days += days === '' ? '' : ',';
+        days += i < last_index ? i + 1 : 0;
+      }
+    }
+    value += ' ' + days;
+    return value;
   }
 }
 

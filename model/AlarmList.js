@@ -73,6 +73,7 @@ class AlarmList {
   save() {
     console.log(this.alarms);
     jsonFile.writeFile(ALARMS_PATH, this.alarms);
+    this.write_crontab();
   }
 
   getNextId() {
@@ -87,6 +88,23 @@ class AlarmList {
       string += alarm.toString() + '\n';
     });
     return string;
+  }
+
+  async write_crontab() {
+    require('crontab').load((err, crontab) => {
+      var jobs = crontab.jobs();
+      jobs.forEach((job) => {
+        if(job.command().includes('reveil.py')) {
+          crontab.remove(job);
+        }
+      });
+      this.alarms.forEach((alarm) => {
+        crontab.create(alarm.bash_command(), alarm.cron_repeat());
+      });
+      crontab.save(function(err, crontab) {
+  
+      });
+    });
   }
 }
 
