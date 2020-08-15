@@ -91,10 +91,14 @@ class AlarmList {
   }
 
   write_crontab() {
-    // Ça ne fonctionne pas, à méditer plus tard...
     require('crontab').load((err, crontab) => {
-      var job = crontab.create('ls -la', '0 7 * * 1,2,3,4,5');
-      crontab.create();
+      crontab.reset();
+      this.alarms.forEach((alarm) => {
+        crontab.create(alarm.bash_command(), alarm.cron_repeat());
+      });
+      crontab.save(function(err, crontab) {
+  
+      });
     });
   }
 }
