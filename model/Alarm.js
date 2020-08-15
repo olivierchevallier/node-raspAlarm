@@ -8,7 +8,7 @@ class Alarm {
     this.active = active;
     this.uri = uri;
 
-    this.COMMAND = 'python3 ../reveil.py';
+    this.COMMAND = 'python3 ' + __dirname + '/reveil.py';
     this.LOG_FILE = 'reveil.log';
   }
 
