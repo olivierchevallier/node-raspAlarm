@@ -10,7 +10,7 @@ The goal of this app is to use a raspberry pi (or any linux computer) as an alar
 1. Be sure to have node and npm installed.
 2. Run `npm install`
 3. Create an empty alarms.json file in data folder
-4. Enter the right parameters in the reveil.py script (this will be done in a more clean way - maybe a .env file - in next updates)
+4. Enter the right parameters in the reveil.py script (this will be done in a cleaner way - maybe a .env file - in next updates)
 5. Run `npm run start`
 
 ## More details
