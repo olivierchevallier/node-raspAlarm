@@ -22,6 +22,7 @@ class AlarmList {
       );
       this.alarms.push(alarm);
     });
+    this.write_crontab();
   }
 
   get(alarm_id) {
@@ -90,7 +91,7 @@ class AlarmList {
     return string;
   }
 
-  async write_crontab() {
+  write_crontab() {
     require('crontab').load((err, crontab) => {
       var jobs = crontab.jobs();
       jobs.forEach((job) => {
