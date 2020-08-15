@@ -100,7 +100,9 @@ class AlarmList {
         }
       });
       this.alarms.forEach((alarm) => {
-        crontab.create(alarm.bash_command(), alarm.cron_repeat());
+        if(alarm.active) {
+          crontab.create(alarm.bash_command(), alarm.cron_repeat());
+        }
       });
       crontab.save(function(err, crontab) {
   
