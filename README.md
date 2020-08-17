@@ -1,4 +1,4 @@
-# RaspAlarm controller
+# RaspAlarm (server)
 ## Description
 This app is the server side of the raspAlarm project. It is composed of :
  - A node.js app wich provides endpoints to manage alarms and save it to crontab
